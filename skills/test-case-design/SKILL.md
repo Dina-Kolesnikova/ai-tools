@@ -67,6 +67,8 @@ points to) and note:
 - test environment and test-data rules (shared environments, data that must not be created,
   e-mails that must not be sent)
 - where test cases are saved and in which format; existing test cases / automation keywords to reuse
+- test layers, if the project defines them (e.g. API / UI / UI+logs) and its rule for assigning a
+  test to a layer → fills the `Layer` column in Step 6
 - known defect history (bug folders, tracker exports) for error guessing
 - output language for team deliverables
 If something is not defined, use the defaults below and say which default you used.
@@ -134,7 +136,13 @@ metamorphic relations, fault list, checklist, charter. Add any new spec defects 
 ## Step 6: Derive test cases
 - High-level first; low-level only where the spec gives concrete values or the user asks
   (`test-analysis-process.md` §3).
-- Each invalid partition and each invalid transition gets its own test case (defect masking).
+- Each invalid partition and each invalid transition is executed alone (defect masking). At high
+  level, one case per field or per state may list its invalid items in Covers ("reject each invalid
+  X"); split them when the case goes low-level or is automated (`techniques-catalog.md`, EP and
+  State transition).
+- `Layer` column (API / UI / UI+logs or whatever the project names) only when the project defines
+  test layers (Step 0): the lowest layer that can observe the expected result, unless the project
+  rule says otherwise. No project layers → no column.
 - Order within a requirement: positive → negative → non-functional (CTFL §4.5.3).
 - No two test cases verify the same characteristic. Merge duplicates.
 - Every test case traces to R-number(s), test condition and the coverage items it exercises.

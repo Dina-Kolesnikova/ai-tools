@@ -18,11 +18,14 @@ column is a practical mapping built on the syllabus definitions: what to look fo
 | Several independent parameters / settings whose **interactions** may fail: browser × OS × role × language, filter combinations, form option combinations, configuration flags | **Combinatorial testing** | Base choice → **Pairwise** → all combinations (only for very high risk, small sets) | Most failures come from 1–2 interacting parameters (CTAL-TA §3.1.2) |
 | Outcome depends on a **combination** of conditions under a business rule: "if A and B then X, unless C"; role × status × flag | **Decision Table** | Minimized table → **full table, all feasible columns, no minimization** at high risk | Finds missing combinations, gaps, contradictions (CTFL §4.2.3, CTAL-TA §3.3.1) |
 | Object has a **lifecycle / status**: Draft → Finalized → Paid; order statuses; active/blocked user | **State Transition** | Valid transitions (0-switch) → All transitions → **1-switch** / **round-trip** for sequence or loop risks | CTFL §4.2.4; N-switch and round-trip added in CTAL-TA §3.2.2 |
-| A forbidden move: "cannot go back", "only from", "once paid" | **State Transition, invalid transitions** | Each invalid transition in its own test case | Avoids defect masking (CTFL §4.2.4) |
+| A forbidden move: "cannot go back", "only from", "once paid" | **State Transition, invalid transitions** | Each invalid transition attempted alone (one low-level case each; a high-level case may group them per state) | Avoids defect masking (CTFL §4.2.4) |
 | A status can come back to an earlier one, cycles: reopen, re-assign, resubmit, cancel & restore | **State Transition, round-trip coverage** | Every loop (round trip) once | Loops are where sequence defects hide (CTAL-TA §3.2.2) |
 | An **entity** created, viewed, edited and deleted by different functions, roles or apps (CRM, API, mobile): users, orders, assets, payouts | **CRUD testing** | Every C/R/U/D cell in the CRUD matrix → after each U, every R | Finds missing lifecycle operations, data integrity and access-control defects (CTAL-TA §3.2.1) |
 | A **user flow / business process**: steps of an actor with branches, "if the user ...", end-to-end journeys, use cases | **Scenario-based testing** (use case / activity diagram) | Every scenario: main + extensions + exceptions; **simple loop coverage** if steps repeat | Realistic end-to-end flows; finds missing features and communication defects (CTAL-TA §3.2.3) |
 | Expected result is **hard to know** for one input, but a relation between inputs/outputs is known: totals, sorting, filtering, search, reports, recalculation, rounding | **Metamorphic testing** | Several follow-up tests per metamorphic relation | Works around the test oracle problem (CTAL-TA §3.3.2, §1.3.4) |
+| A **calculation**: total, tax, fee, discount, refund, per-unit × quantity, currency conversion, rounding | **EP + BVA per operand, one worked example per formula branch, metamorphic relations for totals** | Every operand boundary (2-value → **3-value**) + one worked example per branch of the formula + every rounding rule the spec states; totals checked by MRs (reorder lines, add a zero item, double all amounts) | Data-based techniques find calculation defects (CTAL-TA §3.5.1); formula, precision and rounding rule come from the spec, never from the UI or code (`<?>` if missing); MRs cover the oracle problem (CTAL-TA §3.3.2) |
+| **Dates, times, cut-offs, timers**: check-in / check-out, "within N hours", "until X before", expiry, DST, overnight, month end | **BVA at the spec's unit; Domain testing when two dates relate; State transition when expiry changes a state** | 2-value → **3-value** on both sides of every cut-off, in the reference time zone the spec names (`<?>` if none); `end ≥ start` borders as ON/OFF points; expiry as an event in the state table | Off-by-one and time-zone defects sit on time boundaries (CTFL §4.2.2); a rule over two dates is a domain (CTAL-TA §3.1.1); an expiry is a transition (CTFL §4.2.4) |
+| **Concurrency / repeated action**: two users on one resource, double click, retry after timeout, back button, two tabs, duplicate submit | **Error guessing (fault list) + scenario exceptions** | Each shared resource once: the second actor / second attempt gets the spec's result (rejected, idempotent, queued — `<?>` if silent); flag `⚠ creates data` | Typical failure class that specs rarely state (CTFL §4.4.1); exceptions of the scenario model (CTAL-TA §3.2.3) |
 | Behaviour known to break before: previous bugs in this module, typical dev mistakes, integrations, time zones, rounding, duplicates, concurrency | **Error Guessing / fault attacks** | Fault list from defect history | Uses knowledge of past failures (CTFL §4.4.1) |
 | Spec is thin, outdated or missing; time pressure; new area | **Exploratory, session-based with a charter** | Charter + time box + session sheet + debrief | Useful with few/inadequate specs (CTFL §4.4.2, CTAL-TA §3.4.1) |
 | Recurring quality aspects: UI consistency, required markers, error texts, usability, a regression area with recurring defect types | **Checklist-based** | Every checklist item answered yes / no / N/A | Consistency; records past failures (CTFL §4.4.3, CTAL-TA §3.4.2) |
@@ -87,7 +90,11 @@ schedule is tight (CTAL-TA §3.5.1).
 ## 5. Anti-patterns (stop and correct yourself)
 
 - BVA on an unordered partition, or on one variable when the rule involves two (use domain testing).
-- One test with several invalid values at once: the first error hides the rest.
+- One test that *executes* several invalid values in one step: the first error hides the rest.
+  (A high-level case may *list* several invalid items in Covers; it is split before execution.)
+- A calculation tested only with "the total looks right": no worked example, no rounding rule,
+  no boundary on the operands.
+- A date cut-off tested at one side only, or without naming the time zone.
 - Minimizing a decision table for a high-risk rule; minimized table without the checksum check.
 - State model with only the happy path, or without loops when the status can return.
 - Combinatorial "all combinations" on many parameters (explodes) — use pairwise.
@@ -107,3 +114,7 @@ schedule is tight (CTAL-TA §3.5.1).
 7. Expected result hard to compute? → Metamorphic relations.
 8. Bug history or fragile area? → Error guessing (always at least a short fault list).
 9. Thin spec? → Exploratory charter + questions. Recurring UI/quality aspects? → Checklist.
+10. A formula or a money amount? → EP/BVA per operand + worked example per branch + MRs for totals.
+11. A date, time, cut-off or timer? → BVA at the spec's unit, in the spec's time zone; two dates →
+    Domain; expiry → an event in the state table.
+12. A shared resource or a repeatable action? → Error guessing fault list + a scenario exception.

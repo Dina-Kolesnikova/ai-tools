@@ -79,9 +79,11 @@ Order: blocking first. Keep them short and answerable with one sentence.
 Go through `references/dor-checklist.md` and mark each item ✅ / ❌ / ⚠️ with a short reason.
 
 ## Step 7: Verdict
-- **Ready** — all DoR items pass, no blocking questions.
-- **Ready after answers** — only non-blocking questions remain.
-- **Not ready** — any blocking question, contradiction, or failed mandatory DoR item.
+- **Ready** — all DoR items pass, no open questions.
+- **Ready after answers** — only non-blocking questions remain, or AC / examples were missing and
+  are now proposed for the PO to confirm. Most real stories land here.
+- **Not ready** — only for the mandatory DoR items: the goal is unclear, there is a contradiction,
+  or a blocking question is open. Missing AC alone is never "Not ready".
 
 Also flag if the story is too big (more than 3-4 rules, or rules for unrelated flows)
 and suggest how to split it.

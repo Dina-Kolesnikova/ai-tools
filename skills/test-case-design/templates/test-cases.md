@@ -37,17 +37,20 @@ decision table (+ checksum) / state table / CRUD matrix / scenario list / metamo
 fault list / checklist / charter. Each coverage item has an ID (P1, B1, DT-C1, T1, INV1, S1, MR1, F1 ...).
 
 ## 4. Test cases `[light]`
-| ID | Title (objective) | Priority | Level | Preconditions / test data | Steps | Expected result | Covers | Traces | Status | Flags |
-|---|---|---|---|---|---|---|---|---|---|---|
-| TC-001 | Finalize a Draft payout with all orders delivered | P1 | High | Draft payout; all orders in period delivered | 1. Open payout 2. Finalize | Status = Finalized `[spec]` | T1 | R2 | Tested (run sheet #12) | ⚠ creates data |
-| TC-002 | Paid payout cannot return to Finalized | P1 | High | Paid payout (prereq TC-003) | 1. Try to change status to Finalized | Change rejected; status stays Paid; message `<?>` | INV1 | R2 | New | |
+| ID | Title (objective) | Priority | Level | Layer | Preconditions / test data | Steps | Expected result | Covers | Traces | Status | Flags |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| TC-001 | Finalize a Draft payout with all orders delivered | P1 | High | UI | Draft payout; all orders in period delivered | 1. Open payout 2. Finalize | Status = Finalized `[spec]` | T1 | R2 | Tested (run sheet #12) | ⚠ creates data |
+| TC-002 | Paid payout rejects every forbidden move (edit, revert, delete) | P1 | High | API | Paid payout (prereq TC-003) | For each: 1. Try the move | Each attempt rejected; status stays Paid; message `<?>` | INV1, INV2, INV3 | R2 | New | split per move at low level |
 
 **Priority counts:** P1 = n (x %) · P2 = n · P3 = n — if P1 > ~25–30 %, the reason is stated here.
 **Gaps:** <R-numbers with no test case, or "none"> (light mode; full mode repeats it in section 5).
 Status: `Tested` / `Partially tested` / `New` vs existing coverage (with evidence). Run list = New + Partially tested.
 
 Level: High = high-level (abstract), Low = low-level (concrete values).
-Flags: `⚠ creates data`, `prerequisite: TC-x`, `automation candidate`, keyword steps if requested.
+Layer: only when the project defines test layers (e.g. API / UI / UI+logs); omit the column otherwise.
+Rule: the lowest layer that can observe the expected result, unless the project rule says otherwise.
+Flags: `⚠ creates data`, `prerequisite: TC-x`, `automation candidate`, `split per item at low level`,
+keyword steps if requested.
 
 ### 4.1 Exploratory charters `[light if any]`
 | ID | Explore … | With … | To discover … | Time box | Limitations (must never) | Historical defects |

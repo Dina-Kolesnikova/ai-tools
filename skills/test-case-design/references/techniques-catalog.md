@@ -26,13 +26,16 @@ Common vocabulary (§4.1):
 **Coverage:** partitions exercised / partitions identified. With several inputs, **Each Choice**:
 every partition of every input at least once (combinations are not required).
 
-**Test case rules:** combine several *valid* partitions in one test; give each *invalid* partition
-its own test (otherwise the first rejection hides the others).
+**Test case rules:** combine several *valid* partitions in one test; each *invalid* partition is
+executed alone (otherwise the first rejection hides the others). At **high level** one case per
+field may list all its invalid partitions in Covers ("reject each invalid document type: P4, P5");
+when the case goes low-level or is automated, split it so each invalid item runs on its own.
 
 **Example (generic):** field "Document type" — P1 passport, P2 ID card, P3 driving licence (valid),
-P4 empty (invalid), P5 value not in the list via API (invalid). 5 coverage items → 5 test cases:
-one field takes one value per test, so 3 valid tests + 2 invalid tests. (With a second input, its
-valid partitions can ride along in the same 3 valid tests: that is Each Choice.)
+P4 empty (invalid), P5 value not in the list via API (invalid). 5 coverage items. High level:
+3 valid tests + 1 "reject each invalid document type" case covering P4, P5. Low level: 3 + 2, one
+invalid value per test. (With a second input, its valid partitions can ride along in the same 3
+valid tests: that is Each Choice.)
 
 ---
 
@@ -93,7 +96,9 @@ gaps and contradictions in requirements.
    - **All transitions:** all valid transitions + an attempt at every invalid one (minimum for
      critical software).
 4. A test case = sequence of events from a start state. One test usually covers several valid
-   transitions; **each invalid transition gets its own test case** (avoid defect masking).
+   transitions; **each invalid transition is attempted alone** (avoid defect masking). At high
+   level one case per state may list that state's invalid events in Covers ("Paid rejects: edit,
+   revert, delete — INV2, INV3, INV4"); split per event at low level.
 5. Expected result of an invalid attempt = the spec's rule (rejected, error, no state change).
    If the spec is silent → question.
 
@@ -124,9 +129,13 @@ in similar applications. Categories from the syllabus:
 - **Input:** valid input rejected, parameter missing or wrong
 - **Output:** wrong format, wrong result
 - **Logic:** missing case, wrong operator
-- **Computation:** wrong operand, wrong formula, rounding
+- **Computation:** wrong operand, wrong formula, rounding at the wrong step, currency precision
 - **Interfaces:** parameter mismatch, incompatible types (UI ↔ API ↔ mobile)
 - **Data:** wrong initialisation, wrong type, duplicates, stale data
+
+Two more groups that recur in web products (not a syllabus category; practical additions):
+- **Time:** time zone / DST, off-by-one at a cut-off, system date vs user date, month end, leap day
+- **Repetition:** double submit, retry after timeout, back button, two tabs, the same action by two users
 
 **Fault attack:** for each item on the list, design a test that tries to make it fail.
 Feed the list with the project's defect history (bug folders, tracker).
