@@ -12,7 +12,7 @@ Run them after every change to `SKILL.md`, the references or the template. Three
 | `02-status-flow-and-vague-word.md` | state transition chosen, invalid moves grouped at high level, vague word flagged |
 | `03-calculation-and-dates.md` | calculation and dates signal rows used, worked example, time zone question, P1 share |
 
-The worked example in `../examples/booking-cancellation.md` is the reference for depth: a result
+The worked example in `../examples/membership-cancellation.md` is the reference for depth: a result
 much longer or much shorter than that for a story of similar size is a finding too.
 
 Scoring sheet (copy per run):

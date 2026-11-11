@@ -19,7 +19,7 @@ You propose; the team decides. Never present your AC as agreed.
 
 Read `references/ac-guide.md`, `references/dor-checklist.md`, `references/story-template.md` and
 the shared `../_shared/requirement-smells.md` before analysing.
-Format the output with `templates/report.md`. `examples/booking-cancellation.md` shows the expected
+Format the output with `templates/report.md`. `examples/membership-cancellation.md` shows the expected
 depth; `evals/` has must / must-not checklists to run after changing this skill.
 
 ## Do not use this skill for

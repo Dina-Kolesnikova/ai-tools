@@ -10,12 +10,12 @@ One requirement → several AC → each AC → several test cases.
 
 ## Two formats (use both)
 **Rule-based** — one sentence, good for simple rules:
-> Free cancellation is allowed until 48 hours before check-in.
+> Cancellation is free until 30 days before the next billing date.
 
 **Scenario-based (Given / When / Then)** — concrete example under a rule:
-> Given a confirmed booking with check-in in 72 hours
-> When the guest cancels it
-> Then the booking status is "cancelled" and the guest is refunded 100%
+> Given an Active membership with the next billing date in 45 days
+> When the member cancels it
+> Then the membership status is "Cancelled" and the member is refunded 100%
 
 Given = starting state (Arrange). When = one action (Act). Then = observable result (Assert).
 One When per example. Then must be observable by a user or an API client.
@@ -23,14 +23,14 @@ One When per example. Then must be observable by a user or an API client.
 ## Categories to cover
 | Category | Ask | Example |
 |---|---|---|
-| Happy path | Does the main flow work? | Cancel 72 h before → 100% refund |
-| Negative | What happens on invalid input or a failed action? | Cancel with invalid booking ID → error, nothing changes |
-| Boundary | What happens exactly at the limit, just before and just after? | 48 h exactly, 47 h 59 min, 48 h 1 min |
-| State | What if the object is already in another state? | Cancel an already cancelled / past / unpaid booking |
-| Roles / permissions | Who may do it? Who may not? | Guest cancels someone else's booking → forbidden |
-| Data | Empty, max length, special characters, formats, time zones, currency | Check-in time in hotel time zone vs guest time zone |
+| Happy path | Does the main flow work? | Cancel 45 days before billing → 100% refund |
+| Negative | What happens on invalid input or a failed action? | Cancel with an invalid membership ID → error, nothing changes |
+| Boundary | What happens exactly at the limit, just before and just after? | 30 days exactly, 29 days 23 h, 30 days 1 h |
+| State | What if the object is already in another state? | Cancel an already cancelled / ended / unpaid membership |
+| Roles / permissions | Who may do it? Who may not? | Member cancels someone else's membership → forbidden |
+| Data | Empty, max length, special characters, formats, time zones, currency | Billing date in club time zone vs member time zone |
 | Integration | What if a dependency fails or is slow? | Payment provider timeout during refund |
-| Concurrency | Two actions at the same time? | Two users book the last room |
+| Concurrency | Two actions at the same time? | Two members book the last spot in a class |
 | Non-functional | Messages, e-mails, logs, audit, performance, accessibility | Cancellation e-mail is sent; refund shown in the UI |
 
 ## Good AC checklist

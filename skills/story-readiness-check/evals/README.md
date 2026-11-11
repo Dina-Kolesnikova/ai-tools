@@ -10,7 +10,7 @@ fails; fix the skill text, not the answer.
 | `02-missing-ac-only.md` | complete story without AC → AC proposed, verdict "Ready after answers" |
 | `03-contradiction.md` | requirement vs AC conflict quoted both sides → "Not ready" |
 
-`../examples/booking-cancellation.md` is the depth reference: rules with 3–6 examples each, every
+`../examples/membership-cancellation.md` is the depth reference: rules with 3–6 examples each, every
 unknown value as `<?>` with a question, verdict reasoned in one sentence.
 
 ```

@@ -2,7 +2,7 @@
 
 ## Input
 ```
-Is this story ready? "Guest can download the invoice as PDF"
+Is this story ready? "Customer can download the invoice as PDF"
 ```
 
 ## Must

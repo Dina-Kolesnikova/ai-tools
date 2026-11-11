@@ -27,7 +27,7 @@ Check every requirement, not only the AC:
 - Loopholes: if possible, if needed, as appropriate, where applicable, optionally, should
 - Open-ended: etc., and so on, including but not limited to, TBD
 - Comparatives without a baseline: better, faster, more, improved
-- Hidden actor (passive voice): "the booking is validated" — by whom, when?
+- Hidden actor (passive voice): "the payment is validated" — by whom, when?
 - Undefined terms: "valid", "active user", "standard rate" without a definition
 - "and/or" — two rules in one sentence; which one applies?
 
@@ -55,6 +55,6 @@ missing · ambiguous · inconsistent / contradictory · incorrect · infeasible 
 |---|---|---|
 | The page loads fast | not measurable | Search results appear within 2 s for 95% of requests |
 | Show an error for invalid email | which error, where? | Given email "abc", When I submit, Then I see "Enter a valid email" under the field and the form is not sent |
-| Add `cancelled_at` column | implementation | When a booking is cancelled, Then the cancellation date is shown in booking details |
+| Add `cancelled_at` column | implementation | When a membership is cancelled, Then the cancellation date is shown in the membership details |
 | Cancellation works correctly | untestable | (split into rules with examples) |
-| Refund the guest the right amount | formula missing | Refund = total paid − cancellation fee; fee = `<?>` % of the first night, rounded to 0.01 `<?>` |
+| Refund the member the right amount | formula missing | Refund = prepaid amount − final fee; fee = `<?>`, rounded to 0.01 `<?>` |
