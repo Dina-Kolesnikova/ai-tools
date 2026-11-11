@@ -1,10 +1,13 @@
 # Definition of Ready — checklist
 
 > Starter version. Adapt it with the team: remove items you do not need, add your own.
-> Items marked (M) are mandatory: if one fails, the verdict is "Not ready".
+> Items marked (M) are mandatory: if one fails, the verdict is "Not ready". Everything else
+> failing gives "Ready after answers" at worst. A project `CLAUDE.md` may list its own mandatory
+> items; they replace the (M) set below.
 
 1. (M) **Goal is clear** — who the user is, what they want, why (business value).
-2. (M) **Every requirement has AC** — rule + at least one Given/When/Then example.
+2. **Every requirement has AC** — rule + at least one Given/When/Then example. If missing, the
+   skill proposes them (Step 4) and the PO confirms: that is "Ready after answers", not "Not ready".
 3. (M) **No contradictions** — between requirements, AC, designs and comments.
 4. (M) **No blocking questions open.**
 5. **Negative and boundary cases are covered** for every rule where failure is possible.

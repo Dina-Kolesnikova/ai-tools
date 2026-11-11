@@ -1,17 +1,16 @@
 ---
 name: test-case-design
 description: >-
-  Designs manual test cases from a user story, requirements, spec section, field map
-  or bug fix using ISTQB techniques (CTFL v4.0 + Advanced Test Analyst v4.0):
-  equivalence partitioning, boundary values, domain testing, combinatorial/pairwise,
-  decision tables, state transitions (N-switch, round-trip), CRUD, scenario/use case,
-  metamorphic, error guessing, checklists, exploratory charters. Picks the technique and
-  coverage per requirement by risk, reviews the spec for defects, reports coverage.
+  Designs manual test cases from a user story, requirements, spec section, field map or bug fix
+  with ISTQB test techniques (CTFL v4.0.1 + Advanced Test Analyst v4.0): equivalence partitioning,
+  boundary values, domain testing, pairwise, decision tables, state transitions, CRUD, scenario /
+  use case, metamorphic, error guessing, checklists, exploratory charters. Picks the technique and
+  coverage per requirement by risk, reviews the spec for defects, reports coverage and open questions.
   Use when the user asks to "write test cases", "design tests", "test design for this story",
   "which test technique should I use", "cover this requirement", "test cases for this form /
   status flow / business rule / user flow", "how many tests do I need", "check my test coverage",
   "review this spec for testability" or "select regression tests for this change".
-argument-hint: "story / requirements / spec excerpt / field map (+ risk notes if known)"
+argument-hint: "story / requirements / spec excerpt / field map (+ existing coverage, risk notes, 'light' or 'full')"
 ---
 
 # Test Case Design (ISTQB-driven)
@@ -22,7 +21,9 @@ requirement by risk, and you show your reasoning so the user can check it.
 
 ## Two oracles, never mixed
 - **ISTQB syllabi = oracle for HOW to test**: technique, coverage items, coverage criterion.
-  Cite the section: `CTFL §4.2.2` (Foundation v4.0.1) or `CTAL-TA §3.2.3` (Advanced Test Analyst v4.0).
+  Say the reason and the technique in words first, then the section: "… — 3-value BVA (CTFL §4.2.2)"
+  (Foundation v4.0.1) or "… — scenario-based (CTAL-TA §3.2.3)" (Advanced Test Analyst v4.0).
+  The section numbers in `references/` were verified against the PDFs (stamp at the top of each file).
 - **The project's requirements owner = oracle for WHAT is correct**: expected results come
   from the spec / PO / PM answer (whoever the project's rules name).
   Code is the thing under test, never the source of an expected result.
@@ -37,21 +38,31 @@ requirement by risk, and you show your reasoning so the user can check it.
 | `references/risk-prioritization.md` | Steps 3, 7: risk level, priorities, regression selection |
 | `references/test-analysis-process.md` | Steps 2, 6, 8: test conditions, high/low-level cases, quality criteria, oracles, test data, keywords |
 | `references/test-basis-review.md` | Step 2: spec defects found by modelling and review |
+| `../_shared/requirement-smells.md` | Step 2: requirement quality table, vague words, yes/no checklist, defect types (shared with `story-readiness-check`) |
 | `references/quality-characteristics.md` | Steps 4, 8: functional sub-characteristics, usability, compatibility, flexibility |
 | `templates/test-cases.md` | output format |
+| `examples/membership-cancellation.md` | expected depth of a light report (read once when unsure how much to write) |
+| `evals/` | must / must-not checklists to run after changing this skill |
 
-## Modes
+## Modes and report size
 - **Full design** (default): Steps 0–9.
 - **Spec review only** ("review this spec", "is this testable"): Steps 0–2 + test basis defects.
 - **Technique advice** ("which technique for ..."): Steps 0, 3, 4 only, with the plan table.
 - **Regression selection** ("what to retest after this change"): Step 0, then
   `risk-prioritization.md` section 5; select from existing tests the user provides.
 
+Report size for Full design (template sections are marked `[light]` / `[full]`):
+- **Light** — default for 8 or fewer requirements, or when the user says "light": 1.1 Requirements
+  with risk, 1.3 Test basis defects (only if any), 2 Technique plan, 4 Test cases, 6 Questions.
+  Models (Step 5) are still built and coverage items still get IDs, so the Covers column is
+  countable; the models themselves are not printed.
+- **Full** — user says "full", more than 8 requirements, or a model must be shown to count
+  coverage (a decision table, a state table, a pairwise set): all sections.
+
 ## Do not use this skill for
 - Writing AC / checking story readiness → `story-readiness-check` first
 - REST endpoint scenario tables → `api-test-scenario-generator`
-- Bug reports → `bug-report-creator`
-- Code-diff impact analysis → `impact-analysis`
+- Bug reports, code-diff impact analysis → the project's own tool for that job, if it has one
 - Writing automation code
 
 ## Step 0: Load project context
@@ -62,25 +73,38 @@ points to) and note:
 - test environment and test-data rules (shared environments, data that must not be created,
   e-mails that must not be sent)
 - where test cases are saved and in which format; existing test cases / automation keywords to reuse
+- test layers, if the project defines them (e.g. API / UI / UI+logs) and its rule for assigning a
+  test to a layer → fills the `Layer` column in Step 6
 - known defect history (bug folders, tracker exports) for error guessing
 - output language for team deliverables
 If something is not defined, use the defaults below and say which default you used.
 
-**Existing coverage and decisions — always ask, even if CLAUDE.md is silent:**
-"Are there existing test cases, checklists or test runs for this feature? Is there a defect log,
-findings tracker or decision log (bug list, review comments, Q&A with the PO/PM)?"
+**Intake question — one message, asked once, before any analysis.** Skip the parts the user
+already answered in the request; if everything is answered, do not ask at all.
+1. Existing coverage: "Are there existing test cases, checklists or test runs for this feature? A
+   defect log, findings tracker or decision log (bug list, review comments, Q&A with the PO/PM)?"
+2. Risk notes: "Is anything already known to be risky, or already decided?"
+3. Gate: "Do you want to confirm the technique plan before I write the test cases?"
+   (default: yes when there are more than 3 requirements)
+4. Report size: light or full (default: light for 8 or fewer requirements)
+If the input is only a title or one vague sentence, say so in the same message and ask for the
+description. Do not analyse a title.
+
+With the answers:
 - Read what the user names **in full**: notes and comment columns, not only titles and statuses.
   Answers from the requirements owner and "by design" decisions often live only there.
 - Use it in later steps: Step 2 — a question already answered there is not an Unknown; Step 4 —
   past defects feed error guessing; Step 6 — mark each new case `Tested` / `Partially tested` /
   `New` with the evidence (source + ID); do not re-design what already passed unless the area changed.
 - If the user says there is nothing, record "No existing coverage provided" under Defaults used.
+- Do not stop again before the gate (if wanted) and the final report.
 
 ## Step 1: Accept the test basis and check entry criteria
-Input: story, requirements, spec excerpt, field map, bug fix, or a file path. If it is only a title
-or one vague sentence, stop and ask. Check analysis entry criteria (`test-analysis-process.md` §1):
-scope clear, basis defined, risks known. If there are no AC and rules are unclear, suggest
-`story-readiness-check` first; if the user continues, record every assumption.
+Input: story, requirements, spec excerpt, field map, bug fix, or a file path (a bare title was
+already sent back at intake). Check analysis entry criteria (`test-analysis-process.md` §1):
+scope clear, basis defined, risks known; list what is missing under Defaults used rather than
+stopping. If there are no AC and rules are unclear, suggest `story-readiness-check` first; if the
+user continues, record every assumption.
 
 ## Step 2: Analyse — inventory, test conditions, test basis defects
 - **R1, R2, ...** every testable requirement / rule / AC, quoting the source
@@ -103,9 +127,10 @@ For each requirement, look for the signals in `technique-selection.md` and pick:
   (CTAL-TA §3.5.1: objectives, risks, test basis/models, defect history, SDLC, constraints)
 - relevant non-functional test types from `quality-characteristics.md`
 
-**Gate:** show the technique plan table (template section 2) and wait for the user to confirm or
-adjust it, unless the user said "full", "no gate" or the input has 3 or fewer requirements.
-The plan table is the most valuable part for learning: keep the "why" crisp.
+**Gate:** if the user asked for it at intake (or gave no answer and there are more than 3
+requirements), show the technique plan table (template section 2) and wait for the user to confirm
+or adjust it. If the user said "no gate", continue. This is the only stop between intake and the
+final report. The plan table is the most valuable part for learning: keep the "why" crisp.
 
 ## Step 5: Build the test models
 Show the model each technique produces before any test case, so coverage is countable
@@ -117,7 +142,13 @@ metamorphic relations, fault list, checklist, charter. Add any new spec defects 
 ## Step 6: Derive test cases
 - High-level first; low-level only where the spec gives concrete values or the user asks
   (`test-analysis-process.md` §3).
-- Each invalid partition and each invalid transition gets its own test case (defect masking).
+- Each invalid partition and each invalid transition is executed alone (defect masking). At high
+  level, one case per field or per state may list its invalid items in Covers ("reject each invalid
+  X"); split them when the case goes low-level or is automated (`techniques-catalog.md`, EP and
+  State transition).
+- `Layer` column (API / UI / UI+logs or whatever the project names) only when the project defines
+  test layers (Step 0): the lowest layer that can observe the expected result, unless the project
+  rule says otherwise. No project layers → no column.
 - Order within a requirement: positive → negative → non-functional (CTFL §4.5.3).
 - No two test cases verify the same characteristic. Merge duplicates.
 - Every test case traces to R-number(s), test condition and the coverage items it exercises.
@@ -136,8 +167,10 @@ If more than ~1/3 of requirements are High, re-rank them on a 1–5 scale (§3.2
 check (§3.3) and report the P1 / P2 / P3 counts. Respect dependencies: a prerequisite runs first.
 
 ## Step 8: Coverage and residual risk report
-Per technique: coverage items identified / covered / %, and what is deliberately left out and why
-(e.g. "3-value BVA only for the amount: high risk; 2-value elsewhere"). Traceability summary:
+Per technique: the number of coverage items and what is deliberately left out and why
+(e.g. "3-value BVA only for the amount: high risk; 2-value elsewhere"). No coverage percentage:
+at design time it is 100 % by construction, so only the "not covered" column says anything.
+Traceability summary:
 every R-number → test cases (gaps flagged). Residual risks: quality characteristics not covered
 (performance, security, scalability...) with the suggested owner. State why design stopped
 (coverage target, residual risk, constraint).

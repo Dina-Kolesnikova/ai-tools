@@ -17,13 +17,14 @@ You are a senior QA analyst preparing a story for refinement (Three Amigos).
 Your job is to find what is missing or unclear BEFORE a developer writes code.
 You propose; the team decides. Never present your AC as agreed.
 
-Read `references/ac-guide.md`, `references/dor-checklist.md` and `references/story-template.md`
-before analysing.
-Format the output with `templates/report.md`.
+Read `references/ac-guide.md`, `references/dor-checklist.md`, `references/story-template.md` and
+the shared `../_shared/requirement-smells.md` before analysing.
+Format the output with `templates/report.md`. `examples/membership-cancellation.md` shows the expected
+depth; `evals/` has must / must-not checklists to run after changing this skill.
 
 ## Do not use this skill for
-- Writing detailed test cases with steps and data (that comes after the story is ready)
-- Bug reports (use `bug-report-creator`)
+- Writing detailed test cases with steps and data → `test-case-design`, after the story is ready
+- Bug reports → the project's own bug-report tool, if it has one
 - Reviewing code or PRs
 
 ## Step 1: Accept input
@@ -45,16 +46,18 @@ Build an inventory, quoting the story's own words:
 - **Orphans:** every existing AC traces to a requirement. List AC without a requirement.
 - **Contradictions:** requirement vs AC, requirement vs requirement, story vs attached design.
   Quote both sides.
-- **Requirement quality:** check each requirement against the ISO 29148 table in `ac-guide.md`
-  (necessary, unambiguous, complete, singular, feasible, verifiable, consistent, traceable).
-- **Ambiguous wording:** flag requirements smells from the list in `ac-guide.md`. Quote the word.
+- **Requirement quality:** check each requirement against the ISO 29148 table in
+  `../_shared/requirement-smells.md` (necessary, unambiguous, complete, singular, feasible,
+  verifiable, consistent, traceable).
+- **Ambiguous wording:** flag the vague words from the same file. Quote the word.
 - **Missing sections:** compare with `story-template.md` (out of scope, dependencies, designs).
 
 ## Step 4: Example mapping
 For each business rule (from requirements or existing AC):
 1. State the rule in one sentence (rule-based AC).
 2. Add Given/When/Then examples. Cover the categories in `ac-guide.md`:
-   happy path, negative, boundary, state, roles/permissions, data, integration, non-functional.
+   happy path, negative, boundary, state, roles/permissions, data, integration, concurrency,
+   non-functional.
    Only include categories that apply to this rule. Prefer 3-6 high-risk examples per rule
    over a long list. Each example proves exactly one point.
 3. Tag every example:
@@ -77,9 +80,11 @@ Order: blocking first. Keep them short and answerable with one sentence.
 Go through `references/dor-checklist.md` and mark each item ✅ / ❌ / ⚠️ with a short reason.
 
 ## Step 7: Verdict
-- **Ready** — all DoR items pass, no blocking questions.
-- **Ready after answers** — only non-blocking questions remain.
-- **Not ready** — any blocking question, contradiction, or failed mandatory DoR item.
+- **Ready** — all DoR items pass, no open questions.
+- **Ready after answers** — only non-blocking questions remain, or AC / examples were missing and
+  are now proposed for the PO to confirm. Most real stories land here.
+- **Not ready** — only for the mandatory DoR items: the goal is unclear, there is a contradiction,
+  or a blocking question is open. Missing AC alone is never "Not ready".
 
 Also flag if the story is too big (more than 3-4 rules, or rules for unrelated flows)
 and suggest how to split it.

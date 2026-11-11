@@ -3,7 +3,7 @@
 Use it to flag missing sections. Do not force the team to rewrite a good story into this shape.
 
 ```
-Summary: <verb + object, e.g. "Guest cancels a booking">
+Summary: <verb + object, e.g. "Member cancels a membership">
 
 User story
 As a <role>

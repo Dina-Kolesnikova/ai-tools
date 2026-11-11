@@ -1,5 +1,7 @@
 # Test analysis and test design process
 
+> Section numbers verified 2026-11-10 against the CTAL-TA v4.0 PDF.
+
 Source: ISTQB CTAL-TA v4.0 chapter 1 (and §5.3 for the feedback loop). Paraphrased; cite as `CTAL-TA §x`.
 
 ## 1. Test analysis (CTAL-TA §1.2.1)
