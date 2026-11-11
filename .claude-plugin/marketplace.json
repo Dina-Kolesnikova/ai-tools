@@ -1,5 +1,6 @@
 {
   "name": "ai-tools",
+  "description": "ISTQB-based QA skills for Claude Code: story readiness check, test case design by technique and risk, REST API scenario tables.",
   "owner": {
     "name": "Dina Kolesnikova"
   },
