@@ -11,7 +11,7 @@ R1. Every newsletter e-mail contains an unsubscribe link in the footer.
 R2. Opening the link unsubscribes the address immediately, without login, and shows the page
     "You have been unsubscribed".
 R3. The link stays valid for 30 days after the e-mail was sent; after that it shows the page
-    "This link has expired" with a button to request a new one.
+    "This link has expired".
 R4. An already unsubscribed address that opens the link sees "You have been unsubscribed" again
     and nothing changes.
 Out of scope: resubscribe flow; preference centre.

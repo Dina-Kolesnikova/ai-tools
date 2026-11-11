@@ -62,8 +62,9 @@ claude --plugin-dir <path-to-your-clone-of-ai-tools>
 
 Release workflow:
 - This repo is the **single source of truth**; never copy skill folders around.
-- Edit, run the evals in `skills/<name>/evals/` in a `--plugin-dir` session, and check the
-  manifests with `claude plugin validate .`
+- Edit, run the evals in `skills/<name>/evals/` (`scripts/run-eval.sh <skill> <eval-file>
+  <out-prefix>` runs one eval headless from an empty folder, with the plugin loaded from your
+  clone), and check the manifests with `claude plugin validate .`
 - Bump `version` in both `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`
   (same value; without a new version, `/plugin update` does not see the change) and add a
   changelog line.
@@ -85,6 +86,7 @@ Release workflow:
 
 ## Changelog
 
+- **1.0.1, 2026-11-10** — after the first live eval round: skills no longer list `evals/` as a reference and are told never to open it (one api run had read its own checklist); story-readiness answers a bare title in one line with no verdict, caps questions at ~8 and keeps them inside the story, writes `<?>` for unsettled boundaries; api scenario table folds P3 rows in light mode; `scripts/run-eval.sh` runs an eval from an empty folder; two eval inputs corrected.
 - **1.0.0, 2026-11-10** — packaged as a Claude Code plugin (`.claude-plugin/`); install via
   `/plugin`, no symlinks.
 - **2026-11-10** — new skill `api-test-scenario-generator` (nine scenario groups, baseline + delta

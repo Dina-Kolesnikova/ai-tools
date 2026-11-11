@@ -4,6 +4,11 @@ Manual evals: paste the **Input** of one eval file into a fresh Claude Code sess
 installed, answer the intake question as the file says, then tick every line under **Must** and
 **Must not**. One unticked line = the eval fails; fix the skill text, not the answer.
 
+**Run from an empty folder outside this repo** (or use `scripts/run-eval.sh` at the repo root,
+which does that for you). A session started inside the repo can open the eval file and tune its
+answer to the checklist; it happened once. After a run, check the transcript for any tool call
+that touched `evals/` and discard the run if there is one.
+
 Run them after every change to `SKILL.md`, the references or the template. Three inputs:
 
 | File | Checks |
