@@ -4,6 +4,11 @@ Manual evals: paste the **Input** of one eval file into a fresh Claude Code sess
 installed, answer the intake question as the file says, then tick every line under **Must** and
 **Must not**. One unticked line = the eval fails; fix the skill text, not the answer.
 
+**Run from an empty folder outside this repo** (or use `scripts/run-eval.sh` at the repo root).
+On the first run of these evals the session was started inside the repo, this skill listed the
+folder and read the eval file, and the report said so. After a run, check the transcript for any
+tool call that touched `evals/` and discard the run if there is one.
+
 | File | Checks |
 |---|---|
 | `01-write-endpoint-missing-constraints.md` | no invented limits or status codes; object-level auth row; one request per row |

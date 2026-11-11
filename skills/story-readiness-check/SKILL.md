@@ -20,7 +20,7 @@ You propose; the team decides. Never present your AC as agreed.
 Read `references/ac-guide.md`, `references/dor-checklist.md`, `references/story-template.md` and
 the shared `../_shared/requirement-smells.md` before analysing.
 Format the output with `templates/report.md`. `examples/membership-cancellation.md` shows the expected
-depth; `evals/` has must / must-not checklists to run after changing this skill.
+depth. The `evals/` folder is for maintainers only: never open it while handling a request.
 
 ## Do not use this skill for
 - Writing detailed test cases with steps and data → `test-case-design`, after the story is ready
@@ -31,7 +31,9 @@ depth; `evals/` has must / must-not checklists to run after changing this skill.
 The user pastes the story. It may contain any mix of: title, "As a / I want / So that",
 description, requirements, designs, existing AC, comments.
 
-If the input is only a title or one vague sentence, stop and ask for the description.
+If the input is only a title or one vague sentence, answer in one or two sentences: say that this
+is a title only and name what you need (description, rules, existing AC, designs). Nothing else:
+no inventory, no proposed AC, no DoR table, no verdict, no list of possible meanings of the title.
 Do not invent a feature from a title.
 
 ## Step 2: Extract and number
@@ -65,16 +67,22 @@ For each business rule (from requirements or existing AC):
    - `[proposed]` you inferred it; the PO must confirm
 
 Never invent business values (limits, amounts, time windows, texts, statuses).
-If a value is unknown, write `<?>` in the example and create a question for it.
+If a value is unknown, write `<?>` in the example and create a question for it. A boundary the
+story does not settle (exactly 30 days, exactly 7 days) gets `<?>` in its Then, never a guessed
+outcome tagged `[proposed]`.
 
 ## Step 5: Open questions
-Write questions only for things the story cannot answer.
+Write questions only for things the story cannot answer **and that a developer needs to build
+what the story asks**. Do not ask about features the story does not mention (localisation,
+notifications, other channels, headers, analytics) unless a stated requirement depends on them.
 For each question:
 - link it to a rule or requirement (e.g. "R2")
 - mark **Blocking** (dev cannot start without it) or **Non-blocking**
 - where useful, offer a suggested default the PO can accept ("Suggest: show error X")
 
-Order: blocking first. Keep them short and answerable with one sentence.
+Order: blocking first. Keep them short and answerable with one sentence. Aim for at most 8:
+merge related questions; if more remain, keep every blocking one plus the riskiest non-blocking
+ones and put the rest in one line "Also unclear: …". The report is read in a 20-minute meeting.
 
 ## Step 6: Definition of Ready check
 Go through `references/dor-checklist.md` and mark each item ✅ / ❌ / ⚠️ with a short reason.
