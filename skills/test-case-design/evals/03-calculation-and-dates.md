@@ -22,8 +22,9 @@ Intake answers: no existing coverage; known risk: fee disputes with customers; g
       50 EUR, 30 days) and `<?>` for rounding (the story gives no rounding rule).
 - [ ] Day boundaries are tested on both sides: due date, due date + 1, and the week starts
       (day 1 and day 7/8 of delay), plus the cap week (week 5 vs week 6).
-- [ ] R5 gets 3-value BVA around 50 EUR (49.99, 50.00, 50.01) and a question whether 50.00 is
-      "less than 50".
+- [ ] R5 gets 3-value BVA around 50 EUR (49.99, 50.00, 50.01) and says explicitly how 50.00 is
+      treated: either a question to the PO, or the literal reading named in the case ("less than
+      50" excludes 50.00, so 50.00 gets the fee).
 - [ ] A question asks which time zone / calendar defines "day" and whether the invoice date counts
       as day 0 or day 1.
 - [ ] P1 is at most ~30 % of the cases, or the report states why it is higher.

@@ -36,7 +36,8 @@ technique produced each row so the user can check the coverage.
 | `../test-case-design/references/techniques-catalog.md` | how to derive partitions, boundaries, decision tables, state tables |
 | `../test-case-design/references/risk-prioritization.md` | risk level and P1 / P2 / P3 rules |
 | `examples/membership-cancellation-api.md` | expected depth for one endpoint |
-| `evals/` | must / must-not checklists to run after changing this skill |
+
+Read only these files. The `evals/` folder is for maintainers: never open it while handling a request.
 
 ## Do not use this skill for
 - UI flows and end-to-end journeys → `test-case-design`
@@ -129,6 +130,10 @@ Fill `templates/scenario-table.md`. Light: header, baseline, scenario table, que
 the field matrix (field × partition / boundary → row IDs), the coverage note per group (count, what
 was deliberately left out and why) and residual risks (performance, security depth, rate limits,
 with a suggested owner).
+**Light mode size:** P1 and P2 rows are printed one per request. P3 rows are folded into one row
+per group ("P3 checks: title unicode; description null; …" with the deltas listed and expected
+status per item in short form), so a one-endpoint table stays around 20–35 rows. Full mode prints
+every P3 row on its own.
 If the user asks for **Postman-ready** rows: keep the same table, use `{{baseUrl}}`, `{{token}}`
 and similar variables instead of concrete hosts and secrets, and give concrete payloads only where
 the spec gives the values.

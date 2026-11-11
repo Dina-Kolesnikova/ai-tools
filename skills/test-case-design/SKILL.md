@@ -42,7 +42,8 @@ requirement by risk, and you show your reasoning so the user can check it.
 | `references/quality-characteristics.md` | Steps 4, 8: functional sub-characteristics, usability, compatibility, flexibility |
 | `templates/test-cases.md` | output format |
 | `examples/membership-cancellation.md` | expected depth of a light report (read once when unsure how much to write) |
-| `evals/` | must / must-not checklists to run after changing this skill |
+
+The `evals/` folder is for maintainers only: never open it while handling a request.
 
 ## Modes and report size
 - **Full design** (default): Steps 0–9.
