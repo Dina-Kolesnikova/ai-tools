@@ -22,8 +22,8 @@ before analysing.
 Format the output with `templates/report.md`.
 
 ## Do not use this skill for
-- Writing detailed test cases with steps and data (that comes after the story is ready)
-- Bug reports (use `bug-report-creator`)
+- Writing detailed test cases with steps and data → `test-case-design`, after the story is ready
+- Bug reports → the project's own bug-report tool, if it has one
 - Reviewing code or PRs
 
 ## Step 1: Accept input
@@ -54,7 +54,8 @@ Build an inventory, quoting the story's own words:
 For each business rule (from requirements or existing AC):
 1. State the rule in one sentence (rule-based AC).
 2. Add Given/When/Then examples. Cover the categories in `ac-guide.md`:
-   happy path, negative, boundary, state, roles/permissions, data, integration, non-functional.
+   happy path, negative, boundary, state, roles/permissions, data, integration, concurrency,
+   non-functional.
    Only include categories that apply to this rule. Prefer 3-6 high-risk examples per rule
    over a long list. Each example proves exactly one point.
 3. Tag every example:

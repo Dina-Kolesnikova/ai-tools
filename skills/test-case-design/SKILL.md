@@ -1,17 +1,14 @@
 ---
 name: test-case-design
 description: >-
-  Designs manual test cases from a user story, requirements, spec section, field map
-  or bug fix using ISTQB techniques (CTFL v4.0 + Advanced Test Analyst v4.0):
-  equivalence partitioning, boundary values, domain testing, combinatorial/pairwise,
-  decision tables, state transitions (N-switch, round-trip), CRUD, scenario/use case,
-  metamorphic, error guessing, checklists, exploratory charters. Picks the technique and
-  coverage per requirement by risk, reviews the spec for defects, reports coverage.
+  Designs manual test cases from a user story, requirements, spec section, field map or bug fix
+  with ISTQB test techniques (CTFL v4.0.1 + Advanced Test Analyst v4.0): picks the technique and
+  coverage per requirement by risk, reviews the spec for defects, reports coverage and open questions.
   Use when the user asks to "write test cases", "design tests", "test design for this story",
   "which test technique should I use", "cover this requirement", "test cases for this form /
   status flow / business rule / user flow", "how many tests do I need", "check my test coverage",
   "review this spec for testability" or "select regression tests for this change".
-argument-hint: "story / requirements / spec excerpt / field map (+ risk notes if known)"
+argument-hint: "story / requirements / spec excerpt / field map (+ existing coverage, risk notes, 'light' or 'full')"
 ---
 
 # Test Case Design (ISTQB-driven)
@@ -49,9 +46,8 @@ requirement by risk, and you show your reasoning so the user can check it.
 
 ## Do not use this skill for
 - Writing AC / checking story readiness → `story-readiness-check` first
-- REST endpoint scenario tables → `api-test-scenario-generator`
-- Bug reports → `bug-report-creator`
-- Code-diff impact analysis → `impact-analysis`
+- REST endpoint scenario tables, bug reports, code-diff impact analysis → the project's own tool
+  for that job, if it has one; otherwise do it without this skill
 - Writing automation code
 
 ## Step 0: Load project context
