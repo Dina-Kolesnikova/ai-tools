@@ -2,7 +2,7 @@
   "name": "ai-tools",
   "displayName": "QA AI Tools",
   "description": "ISTQB-based QA skills: story readiness check (Definition of Ready + proposed acceptance criteria), test case design by technique and risk, and REST API scenario tables ready for Postman or automation. Project-agnostic; no product data.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": {
     "name": "Dina Kolesnikova"
   },

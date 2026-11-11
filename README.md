@@ -86,6 +86,7 @@ Release workflow:
 
 ## Changelog
 
+- **1.0.3, 2026-11-10** — story-readiness: a boundary that decides an amount or a right (refund or charge, access granted or denied, a legal limit) is Blocking again; other boundary units stay Non-blocking. Brings the rule in line with the membership example (Q1).
 - **1.0.2, 2026-11-10** — second eval round (clean re-runs from an empty folder): story-readiness defines Blocking strictly (main flow cannot be built without the answer; boundary units, edge-case precedence and error texts are non-blocking), so a complete story without AC lands on "Ready after answers"; api no-spec mode asks first to confirm the observed happy path; list endpoints must print the pairwise filter set.
 - **1.0.1, 2026-11-10** — after the first live eval round: skills no longer list `evals/` as a reference and are told never to open it (one api run had read its own checklist); story-readiness answers a bare title in one line with no verdict, caps questions at ~8 and keeps them inside the story, writes `<?>` for unsettled boundaries; api scenario table folds P3 rows in light mode; `scripts/run-eval.sh` runs an eval from an empty folder; two eval inputs corrected.
 - **1.0.0, 2026-11-10** — packaged as a Claude Code plugin (`.claude-plugin/`); install via

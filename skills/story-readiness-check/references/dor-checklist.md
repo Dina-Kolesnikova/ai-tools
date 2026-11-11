@@ -11,7 +11,8 @@
 3. (M) **No contradictions** — between requirements, AC, designs and comments.
 4. (M) **No blocking questions open.** Blocking = the main flow cannot be built or tested without
    the answer (missing formula or amount, undefined core state, contradiction in the main flow).
-   Boundary units, edge-case precedence, error texts and failure paths are non-blocking.
+   Boundary units, edge-case precedence, error texts and failure paths are non-blocking, except a
+   boundary that decides an amount or a right (refund or charge, access granted or denied): blocking.
 5. **Negative and boundary cases are covered** for every rule where failure is possible.
 6. **Business values are explicit** — limits, amounts, time windows, statuses, error texts.
 7. **Scope is clear** — what is out of scope is written down.

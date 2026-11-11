@@ -81,7 +81,9 @@ For each question:
   at all without the answer: a missing formula or amount, an undefined core state, a contradiction
   inside the main flow. A boundary unit ("exactly 30 days?"), the precedence between two edge
   cases, an error-page text or a failure path are **Non-blocking**: propose a default and move on.
-  When in doubt, Non-blocking.
+  Exception: a boundary that decides an amount or a right (refund or charge, access granted or
+  denied, a legal limit) is **Blocking**, because the developer must choose `<` or `<=`.
+  Otherwise, when in doubt, Non-blocking.
 - where useful, offer a suggested default the PO can accept ("Suggest: show error X")
 
 Order: blocking first. Keep them short and answerable with one sentence. Aim for at most 8:
