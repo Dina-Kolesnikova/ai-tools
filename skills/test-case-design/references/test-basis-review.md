@@ -25,7 +25,7 @@ Pick by goal, test basis type and risk:
 | Technique | How | Best when |
 |---|---|---|
 | **Ad hoc** | read and note anomalies, no structure | quick look, low risk |
-| **Checklist-based** | check against a checklist tailored to basis type and risk; not limited to it | recurring defect types; use section 3 below |
+| **Checklist-based** | check against a checklist tailored to basis type and risk; not limited to it | recurring defect types; use the shared checklist (section 3) |
 | **Scenario-based** | dry-run the expected usage step by step, then think beyond it | the basis is a use case, flow or activity diagram |
 | **Role-based** | review as specific user types / org roles (persona: admin, dispatcher, driver, new user, experienced user) | several roles with different permissions |
 | **Perspective-based reading** | review from a stakeholder viewpoint **and try to produce that stakeholder's work product** (as tester: draft acceptance tests) | the most in-depth individual review; default for this skill |
@@ -34,17 +34,11 @@ Pick by goal, test basis type and risk:
 models is the review. Whatever blocks deriving a test (no expected result, undefined value, conflict) is a
 test basis defect.
 
-## 3. Short requirement checklist (yes / no / N/A)
+## 3. Requirement checklist and vague words
 
-- Is every expected result stated, including for invalid input and forbidden actions?
-- Are all values defined (limits, units, precision, time zone, rounding, currency)?
-- Is every role's permission stated (who can see / create / edit / delete)?
-- For each status: which events are allowed, which are forbidden, and what happens on a forbidden attempt?
-- Are combinations of conditions covered, and do any two rules conflict?
-- Is the behaviour across all clients (web, mobile, API, e-mail/notifications) specified and consistent?
-- Is what happens to related data on edit / delete specified?
-- Are vague words present ("fast", "user-friendly", "appropriate", "etc.", "and/or", "should")?
-- Is anything explicitly out of scope?
+Shared with `story-readiness-check`: `../../_shared/requirement-smells.md` (ISO 29148
+characteristics, vague-words list, the yes/no requirement checklist, defect types). Use it for the
+checklist-based review above and quote the word you flag.
 
 ## 4. Output format for test basis defects
 
@@ -52,5 +46,4 @@ test basis defect.
 |---|---|---|---|---|---|---|
 | D1 | R3 | Missing transition | "Paid" has no rule for edit/revert | State model | "Can a Paid payout be edited or reverted? If not, what error is shown?" | Yes |
 
-Defect types: missing, ambiguous, inconsistent / contradictory, incorrect, infeasible, untestable,
-redundant, unnecessary.
+Defect types: the list in `requirement-smells.md` section 4.

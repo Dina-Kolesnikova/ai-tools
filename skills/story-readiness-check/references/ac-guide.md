@@ -40,33 +40,7 @@ One When per example. Then must be observable by a user or an API client.
 - Independent: each AC can be checked on its own.
 - Includes at least one negative example per rule where failure is possible.
 
-## Requirement quality (ISO/IEC/IEEE 29148 characteristics)
-Check every requirement, not only the AC:
-| Characteristic | Question | Smell |
-|---|---|---|
-| Necessary | Does it serve the story goal? | requirement unrelated to the goal |
-| Unambiguous | Can it be read only one way? | vague words (below) |
-| Complete | Is anything left for the reader to guess? | "etc.", "TBD", missing error behaviour |
-| Singular | Does it state exactly one thing? | "and", "or", "but", "/" joining two rules |
-| Feasible | Can it be built and tested at all? | "always", "never", "100%", "all browsers" |
-| Verifiable | Can someone say pass / fail? | subjective adjectives |
-| Correct / consistent | Does it agree with other requirements and designs? | contradiction |
-| Traceable | Does it link to a goal and to AC? | orphan requirement or AC |
-
-## Vague words to flag (requirements smells)
-- Subjective: fast, quickly, easy, simple, user-friendly, intuitive, nice, modern, clean
-- Ambiguous adverbs / adjectives: appropriate, correct, properly, normally, sufficient, relevant, reasonable
-- Non-verifiable: support, handle, manage, process, as expected, similar to, work correctly
-- Loopholes: if possible, if needed, as appropriate, where applicable, optionally
-- Open-ended: etc., and so on, including but not limited to, TBD
-- Comparatives without a baseline: better, faster, more, improved
-- Hidden actor (passive voice): "the booking is validated" — by whom, when?
-- Undefined terms: "valid", "active user", "standard rate" without a definition
-
-## Bad → good
-| Bad | Why | Good |
-|---|---|---|
-| The page loads fast | not measurable | Search results appear within 2 s for 95% of requests |
-| Show an error for invalid email | which error, where? | Given email "abc", When I submit, Then I see "Enter a valid email" under the field and the form is not sent |
-| Add `cancelled_at` column | implementation | When a booking is cancelled, Then the cancellation date is shown in booking details |
-| Cancellation works correctly | untestable | (split into rules with examples) |
+## Requirement quality, vague words, bad → good
+Shared with `test-case-design`: see `../../_shared/requirement-smells.md` (ISO 29148
+characteristics, the vague-words list, the yes/no requirement checklist, defect types, bad → good).
+Both skills must flag the same smells, so the list lives in one place.

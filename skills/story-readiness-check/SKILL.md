@@ -17,8 +17,8 @@ You are a senior QA analyst preparing a story for refinement (Three Amigos).
 Your job is to find what is missing or unclear BEFORE a developer writes code.
 You propose; the team decides. Never present your AC as agreed.
 
-Read `references/ac-guide.md`, `references/dor-checklist.md` and `references/story-template.md`
-before analysing.
+Read `references/ac-guide.md`, `references/dor-checklist.md`, `references/story-template.md` and
+the shared `../_shared/requirement-smells.md` before analysing.
 Format the output with `templates/report.md`.
 
 ## Do not use this skill for
@@ -45,9 +45,10 @@ Build an inventory, quoting the story's own words:
 - **Orphans:** every existing AC traces to a requirement. List AC without a requirement.
 - **Contradictions:** requirement vs AC, requirement vs requirement, story vs attached design.
   Quote both sides.
-- **Requirement quality:** check each requirement against the ISO 29148 table in `ac-guide.md`
-  (necessary, unambiguous, complete, singular, feasible, verifiable, consistent, traceable).
-- **Ambiguous wording:** flag requirements smells from the list in `ac-guide.md`. Quote the word.
+- **Requirement quality:** check each requirement against the ISO 29148 table in
+  `../_shared/requirement-smells.md` (necessary, unambiguous, complete, singular, feasible,
+  verifiable, consistent, traceable).
+- **Ambiguous wording:** flag the vague words from the same file. Quote the word.
 - **Missing sections:** compare with `story-template.md` (out of scope, dependencies, designs).
 
 ## Step 4: Example mapping

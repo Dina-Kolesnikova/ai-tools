@@ -34,6 +34,7 @@ requirement by risk, and you show your reasoning so the user can check it.
 | `references/risk-prioritization.md` | Steps 3, 7: risk level, priorities, regression selection |
 | `references/test-analysis-process.md` | Steps 2, 6, 8: test conditions, high/low-level cases, quality criteria, oracles, test data, keywords |
 | `references/test-basis-review.md` | Step 2: spec defects found by modelling and review |
+| `../_shared/requirement-smells.md` | Step 2: requirement quality table, vague words, yes/no checklist, defect types (shared with `story-readiness-check`) |
 | `references/quality-characteristics.md` | Steps 4, 8: functional sub-characteristics, usability, compatibility, flexibility |
 | `templates/test-cases.md` | output format |
 
