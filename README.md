@@ -29,28 +29,45 @@ In any Claude Code chat (terminal, desktop, VS Code or JetBrains panel):
 /plugin install ai-tools@ai-tools
 ```
 
-Update later with `/plugin update ai-tools`. The skills are then called with the plugin prefix:
-`/ai-tools:test-case-design`, `/ai-tools:story-readiness-check`,
-`/ai-tools:api-test-scenario-generator`, or just ask in words ("design test cases for this story").
+The skills are then called with the plugin prefix: `/ai-tools:test-case-design`,
+`/ai-tools:story-readiness-check`, `/ai-tools:api-test-scenario-generator`, or just ask in words
+("design test cases for this story").
 
 The whole repo is installed, so the shared folder `skills/_shared/` and the cross-skill links
 (`../test-case-design/references/...`) work without any extra step.
 
+If you used an earlier copy or symlink of these skills in `~/.claude/skills/`, remove it after
+installing the plugin; otherwise every skill appears twice.
+
+## Update
+
+Claude Code installs a copy of the plugin, pinned to its `version`. To get a newer release:
+
+```
+/plugin marketplace update ai-tools
+/plugin update ai-tools@ai-tools
+```
+
+Then restart Claude Code. The changelog below lists what each version changed.
+
 ## Developing the skills
 
-To edit a skill and see the change at once, add the marketplace from your local clone instead of
-GitHub, then install from it:
+Claude Code works from the installed copy, so edits in a clone are not visible until they are
+released. To try your edits before releasing, start a session with the plugin loaded straight from
+your clone (this session only; nothing is installed):
 
 ```
-/plugin marketplace add ~/Documents/Projects/ai-tools
-/plugin install ai-tools@ai-tools
+claude --plugin-dir <path-to-your-clone-of-ai-tools>
 ```
 
-Workflow:
+Release workflow:
 - This repo is the **single source of truth**; never copy skill folders around.
-- Edit here, run the evals in `skills/<name>/evals/`, bump `version` in both
-  `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`, commit, push.
-  Users get the change with `/plugin update ai-tools`.
+- Edit, run the evals in `skills/<name>/evals/` in a `--plugin-dir` session, and check the
+  manifests with `claude plugin validate .`
+- Bump `version` in both `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`
+  (same value; without a new version, `/plugin update` does not see the change) and add a
+  changelog line.
+- Commit and push to `main`. Users then run the two update commands above.
 - New skill: create `skills/<name>/SKILL.md` (+ `references/`, `templates/`, `examples/`,
   `evals/`), add a row to the table above and a line to the changelog.
 - The repo is **public**: no project- or company-specific content, no credentials, no copyrighted

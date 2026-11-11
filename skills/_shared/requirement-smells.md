@@ -1,8 +1,8 @@
-# Requirement smells (shared by `story-readiness-check` and `test-case-design`)
+# Requirement smells (shared by `story-readiness-check`, `test-case-design` and `api-test-scenario-generator`)
 
-One list, used by both skills, so a story gets the same verdict whichever skill reads it.
+One list, used by all three skills, so a story gets the same verdict whichever skill reads it.
 `story-readiness-check` uses it in Step 3 (requirement quality). `test-case-design` uses it in
-Step 2 (test basis defects). Quote the word or sentence you flag; never paraphrase a smell.
+Step 2 (test basis defects). `api-test-scenario-generator` uses it in Step 2 (spec defects). Quote the word or sentence you flag; never paraphrase a smell.
 
 ## 1. Requirement quality (ISO/IEC/IEEE 29148 characteristics)
 

@@ -2,7 +2,9 @@
 name: test-case-design
 description: >-
   Designs manual test cases from a user story, requirements, spec section, field map or bug fix
-  with ISTQB test techniques (CTFL v4.0.1 + Advanced Test Analyst v4.0): picks the technique and
+  with ISTQB test techniques (CTFL v4.0.1 + Advanced Test Analyst v4.0): equivalence partitioning,
+  boundary values, domain testing, pairwise, decision tables, state transitions, CRUD, scenario /
+  use case, metamorphic, error guessing, checklists, exploratory charters. Picks the technique and
   coverage per requirement by risk, reviews the spec for defects, reports coverage and open questions.
   Use when the user asks to "write test cases", "design tests", "test design for this story",
   "which test technique should I use", "cover this requirement", "test cases for this form /
