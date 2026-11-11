@@ -39,7 +39,7 @@ requirement by risk, and you show your reasoning so the user can check it.
 | `../_shared/requirement-smells.md` | Step 2: requirement quality table, vague words, yes/no checklist, defect types (shared with `story-readiness-check`) |
 | `references/quality-characteristics.md` | Steps 4, 8: functional sub-characteristics, usability, compatibility, flexibility |
 | `templates/test-cases.md` | output format |
-| `examples/booking-cancellation.md` | expected depth of a light report (read once when unsure how much to write) |
+| `examples/membership-cancellation.md` | expected depth of a light report (read once when unsure how much to write) |
 | `evals/` | must / must-not checklists to run after changing this skill |
 
 ## Modes and report size
@@ -59,8 +59,8 @@ Report size for Full design (template sections are marked `[light]` / `[full]`):
 
 ## Do not use this skill for
 - Writing AC / checking story readiness → `story-readiness-check` first
-- REST endpoint scenario tables, bug reports, code-diff impact analysis → the project's own tool
-  for that job, if it has one; otherwise do it without this skill
+- REST endpoint scenario tables → `api-test-scenario-generator`
+- Bug reports, code-diff impact analysis → the project's own tool for that job, if it has one
 - Writing automation code
 
 ## Step 0: Load project context

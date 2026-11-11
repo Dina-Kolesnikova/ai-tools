@@ -8,12 +8,16 @@ AI tooling for QA work: Claude Code skills (and more to come).
 |---|---|
 | [`test-case-design`](skills/test-case-design/SKILL.md) | Designs manual test cases from a story / spec / field map / bug fix using ISTQB techniques (CTFL v4.0.1 + CTAL-TA v4.0): picks the technique and coverage per requirement by risk, reviews the spec for defects, reports what is deliberately not covered and the open questions. Light report by default, full on request. |
 | [`story-readiness-check`](skills/story-readiness-check/SKILL.md) | Definition-of-Ready gate for a user story: proposed acceptance criteria (rules + Given/When/Then), open questions for the PO, gaps and contradictions, Ready / Ready after answers / Not ready verdict. Used by `test-case-design` before test design when the story is not ready. |
+| [`api-test-scenario-generator`](skills/api-test-scenario-generator/SKILL.md) | Turns a REST endpoint spec (OpenAPI fragment, examples or plain text + rules) into a scenario table ready for Postman or automation: contract, per-field validation (EP/BVA), auth and object-level permissions, resource state, business rules, idempotency and concurrency, pagination, side effects, robustness. One request per row, delta from a baseline. |
 
-Shared by both: [`skills/_shared/requirement-smells.md`](skills/_shared/requirement-smells.md)
+Shared by all: [`skills/_shared/requirement-smells.md`](skills/_shared/requirement-smells.md)
 (ISO 29148 requirement quality, vague words, requirement checklist, defect types).
+`api-test-scenario-generator` also reuses the technique and risk references of `test-case-design`.
 
 Each skill folder also has:
-- `examples/` — one worked example (input + finished report) that sets the expected depth
+- `examples/` — one worked example (input + finished report) that sets the expected depth. All
+  three use the same invented story (a gym membership cancellation), so the story, the test design
+  and the API scenarios can be read side by side. No real product data anywhere.
 - `evals/` — short inputs with must / must-not checklists; run them after every change to the skill
 
 ## Install
@@ -23,7 +27,7 @@ then restart Claude Code:
 
 ```bash
 git clone https://github.com/Dina-Kolesnikova/ai-tools.git ~/Documents/Apps/ai-tools
-for s in _shared test-case-design story-readiness-check; do
+for s in _shared test-case-design story-readiness-check api-test-scenario-generator; do
   ln -s ~/Documents/Apps/ai-tools/skills/$s ~/.claude/skills/$s
 done
 ```
@@ -56,6 +60,9 @@ Then run `/test-case-design` or ask "design test cases for this story".
 
 ## Changelog
 
+- **2026-11-10** — new skill `api-test-scenario-generator` (nine scenario groups, baseline + delta
+  table, example and evals); all examples moved to one invented domain (gym membership), no
+  hotel / travel wording left.
 - **2026-11-10** — review round: one intake question instead of three stops; light / full report;
   coverage table without a % column; shared requirement-smells file; DoR no longer fails a story
   for missing AC alone; invalid cases grouped at high level; new signal rows for calculations,
