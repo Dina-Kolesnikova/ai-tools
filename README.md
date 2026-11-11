@@ -96,3 +96,7 @@ Release workflow:
   dates / cut-offs and concurrency; optional Layer column; worked examples and evals for both
   skills; dangling skill names removed; ISTQB section numbers verified against the PDFs.
 - **2026-11** — first version: `test-case-design` and `story-readiness-check`.
+
+## License
+
+[MIT](LICENSE) © 2026 Dina Kolesnikova
