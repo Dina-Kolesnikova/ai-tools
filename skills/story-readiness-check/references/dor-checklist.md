@@ -9,7 +9,9 @@
 2. **Every requirement has AC** — rule + at least one Given/When/Then example. If missing, the
    skill proposes them (Step 4) and the PO confirms: that is "Ready after answers", not "Not ready".
 3. (M) **No contradictions** — between requirements, AC, designs and comments.
-4. (M) **No blocking questions open.**
+4. (M) **No blocking questions open.** Blocking = the main flow cannot be built or tested without
+   the answer (missing formula or amount, undefined core state, contradiction in the main flow).
+   Boundary units, edge-case precedence, error texts and failure paths are non-blocking.
 5. **Negative and boundary cases are covered** for every rule where failure is possible.
 6. **Business values are explicit** — limits, amounts, time windows, statuses, error texts.
 7. **Scope is clear** — what is out of scope is written down.
