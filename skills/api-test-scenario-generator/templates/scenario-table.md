@@ -1,6 +1,7 @@
 # API Test Scenarios: <service / feature — endpoint(s)>
 
-**Spec:** <file / page / ticket, version or date> · **Owner of expected results:** <spec / PO / dev lead>
+**Spec:** <file / page / ticket, version or date — or "none, contract reconstructed from N observed calls on <date>"> · **Owner of expected results:** <spec / PO / dev lead>
+**Tags:** `[spec]` stated in the spec · `[observed]` seen on the running service, to be confirmed · `[proposed]` typical, not stated · `<?>` unknown, question raised
 **Defaults used:** <skill defaults applied because the project did not define them>
 **Existing coverage read:** <collection / tests / bug list read in full, or "none provided">
 
@@ -32,7 +33,7 @@ Expected: `<status> [spec]` with `<body shape>`.
 | C-04 | C | another user's resource | path id = resource of user B, token of user A | `<?>` (403 or 404 `[proposed]`) | no resource data in the body | nothing changed | EP on actor | P1 | |
 
 **Priority counts:** P1 = n (x %) · P2 = n · P3 = n — reason stated if P1 > ~30 %.
-Flags: `⚠ creates data`, `needs: <data / role>`, `blocked by Q<n>`, `postman: <note>`.
+Flags: `⚠ creates data`, `needs: <data / role>`, `blocked by Q<n>`, `run to learn` (no-spec mode: not yet observed), `postman: <note>`.
 
 ## 5. Field matrix `[full]`
 | Field | Valid partitions | Invalid partitions | Boundaries | Rows |

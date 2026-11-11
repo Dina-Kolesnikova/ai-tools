@@ -56,7 +56,19 @@ When the spec is silent, a row may offer the usual code **tagged `[proposed]`** 
 allowed, 409 state conflict or duplicate, 413 payload too large, 415 unsupported media type,
 422 semantically invalid (some APIs use 400 for this — ask), 429 rate limited.
 
-## 5. Baseline request
+## 5. When there is no spec: what to capture first
+
+Ask the user for, in this order, and stop as soon as you have enough for a baseline:
+1. One successful call: full request (method, URL, headers minus secrets, body) and full response
+   (status, headers, body). This is the baseline, tagged `[observed]`.
+2. One failed call if they have one (any 4xx) — it shows the error body format.
+3. The roles / tokens they can get, and one id that belongs to a different user.
+4. Where the data lands (a GET endpoint, a UI page, a table) so side effects can be checked.
+Then produce the table with `run to learn` rows; the user runs them and reports back. Treat every
+response as a fact about today's build, not as the requirement: the questions table asks the
+developer to confirm each one.
+
+## 6. Baseline request
 
 Define one **baseline**: the minimal valid request that returns the happy-path response, with
 every value coming from the spec or marked `<?>`. Each scenario row states only its **delta**
