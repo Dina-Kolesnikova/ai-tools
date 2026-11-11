@@ -11,14 +11,27 @@ AI tooling for QA work: Claude Code skills (and more to come).
 
 ## Install
 
-Copy (or symlink) a skill folder into `~/.claude/skills/` and restart Claude Code:
+Clone the repo and **symlink** each skill folder into `~/.claude/skills/`, then restart Claude Code:
 
 ```bash
-git clone https://github.com/Dina-Kolesnikova/ai-tools.git
-cp -R ai-tools/skills/test-case-design ai-tools/skills/story-readiness-check ~/.claude/skills/
+git clone https://github.com/Dina-Kolesnikova/ai-tools.git ~/Documents/Apps/ai-tools
+for s in test-case-design story-readiness-check; do
+  ln -s ~/Documents/Apps/ai-tools/skills/$s ~/.claude/skills/$s
+done
 ```
 
 Then run `/test-case-design` or ask "design test cases for this story".
+
+## Editing workflow (for humans and agents)
+
+- This repo is the **single source of truth**. `~/.claude/skills/<name>` is a symlink to
+  `skills/<name>` here — never a copy.
+- Edit the skill here; Claude Code sees the change immediately (no copy / rsync step).
+- Then commit and push from this repo. If `~/.claude/skills` is itself a git repo, keep these
+  symlinks in its `.gitignore` so they are never committed there.
+- New skill: create `skills/<name>/SKILL.md`, add the symlink, add a row to the table above.
+- The repo is **public**: no project- or company-specific content, no credentials, no copyrighted
+  source documents (ISTQB syllabi are paraphrased and cited, not copied).
 
 ## Notes
 
