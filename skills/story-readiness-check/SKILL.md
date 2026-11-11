@@ -77,7 +77,11 @@ what the story asks**. Do not ask about features the story does not mention (loc
 notifications, other channels, headers, analytics) unless a stated requirement depends on them.
 For each question:
 - link it to a rule or requirement (e.g. "R2")
-- mark **Blocking** (dev cannot start without it) or **Non-blocking**
+- mark **Blocking** or **Non-blocking**. Blocking means the main flow cannot be built or tested
+  at all without the answer: a missing formula or amount, an undefined core state, a contradiction
+  inside the main flow. A boundary unit ("exactly 30 days?"), the precedence between two edge
+  cases, an error-page text or a failure path are **Non-blocking**: propose a default and move on.
+  When in doubt, Non-blocking.
 - where useful, offer a suggested default the PO can accept ("Suggest: show error X")
 
 Order: blocking first. Keep them short and answerable with one sentence. Aim for at most 8:

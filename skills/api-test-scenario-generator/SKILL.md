@@ -66,9 +66,9 @@ Common case: the endpoint exists, nobody wrote the spec. The skill still works, 
   inventory from the captured request / response pairs the user gives you: fields seen, types
   seen, statuses seen. Tag every such fact `[observed]`, never `[spec]`.
 - **Observed is not correct.** The running service is the thing under test, so an observed
-  response is a hypothesis. Each `[observed]` expectation gets one line in the questions table:
-  "Is this the intended behaviour?" addressed to the developer or owner. Anything not yet observed
-  is `<?>`.
+  response is a hypothesis. The first question in the table is always "Is the observed happy path
+  (status, body shape, field types) the intended behaviour?"; every other `[observed]` fact gets
+  its own confirmation line, addressed to the developer or owner. Anything not yet observed is `<?>`.
 - **The scenario table doubles as the discovery plan.** Rows the user has not run yet are marked
   `run to learn` in Flags: they tell the user which requests to send to find the rest of the
   contract (each field removed, wrong type, no token, another user's id, the same call twice).

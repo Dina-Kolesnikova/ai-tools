@@ -8,7 +8,7 @@
       "name": "ai-tools",
       "source": "./",
       "description": "ISTQB-based QA skills: story readiness, test case design, API scenario tables. Install once, update with /plugin update.",
-      "version": "1.0.1"
+      "version": "1.0.2"
     }
   ]
 }
