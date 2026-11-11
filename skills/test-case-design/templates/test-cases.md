@@ -2,6 +2,7 @@
 
 **Test basis:** <story / spec section / file, version or date> · **Requirements owner:** <PO / PM / spec>
 **Defaults used:** <list any skill defaults applied because the project did not define them>
+**Existing coverage read:** <test case sets / runs / defect or findings logs read in full, or "No existing coverage provided">
 
 ## 1. Analysis
 
@@ -33,10 +34,13 @@ decision table (+ checksum) / state table / CRUD matrix / scenario list / metamo
 fault list / checklist / charter. Each coverage item has an ID (P1, B1, DT-C1, T1, INV1, S1, MR1, F1 ...).
 
 ## 4. Test cases
-| ID | Title (objective) | Priority | Level | Preconditions / test data | Steps | Expected result | Covers | Traces | Flags |
-|---|---|---|---|---|---|---|---|---|---|
-| TC-001 | Finalize a Draft payout with all orders delivered | P1 | High | Draft payout; all orders in period delivered | 1. Open payout 2. Finalize | Status = Finalized `[spec]` | T1 | R2 | ⚠ creates data |
-| TC-002 | Paid payout cannot return to Finalized | P1 | High | Paid payout (prereq TC-003) | 1. Try to change status to Finalized | Change rejected; status stays Paid; message `<?>` | INV1 | R2 | |
+| ID | Title (objective) | Priority | Level | Preconditions / test data | Steps | Expected result | Covers | Traces | Status | Flags |
+|---|---|---|---|---|---|---|---|---|---|---|
+| TC-001 | Finalize a Draft payout with all orders delivered | P1 | High | Draft payout; all orders in period delivered | 1. Open payout 2. Finalize | Status = Finalized `[spec]` | T1 | R2 | Tested (run sheet #12) | ⚠ creates data |
+| TC-002 | Paid payout cannot return to Finalized | P1 | High | Paid payout (prereq TC-003) | 1. Try to change status to Finalized | Change rejected; status stays Paid; message `<?>` | INV1 | R2 | New | |
+
+**Priority counts:** P1 = n (x %) · P2 = n · P3 = n — if P1 > ~25–30 %, the reason is stated here.
+Status: `Tested` / `Partially tested` / `New` vs existing coverage (with evidence). Run list = New + Partially tested.
 
 Level: High = high-level (abstract), Low = low-level (concrete values).
 Flags: `⚠ creates data`, `prerequisite: TC-x`, `automation candidate`, keyword steps if requested.

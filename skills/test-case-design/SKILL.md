@@ -66,6 +66,16 @@ points to) and note:
 - output language for team deliverables
 If something is not defined, use the defaults below and say which default you used.
 
+**Existing coverage and decisions — always ask, even if CLAUDE.md is silent:**
+"Are there existing test cases, checklists or test runs for this feature? Is there a defect log,
+findings tracker or decision log (bug list, review comments, Q&A with the PO/PM)?"
+- Read what the user names **in full**: notes and comment columns, not only titles and statuses.
+  Answers from the requirements owner and "by design" decisions often live only there.
+- Use it in later steps: Step 2 — a question already answered there is not an Unknown; Step 4 —
+  past defects feed error guessing; Step 6 — mark each new case `Tested` / `Partially tested` /
+  `New` with the evidence (source + ID); do not re-design what already passed unless the area changed.
+- If the user says there is nothing, record "No existing coverage provided" under Defaults used.
+
 ## Step 1: Accept the test basis and check entry criteria
 Input: story, requirements, spec excerpt, field map, bug fix, or a file path. If it is only a title
 or one vague sentence, stop and ask. Check analysis entry criteria (`test-analysis-process.md` §1):
@@ -115,10 +125,15 @@ metamorphic relations, fault list, checklist, charter. Add any new spec defects 
 - State test data needs and dependencies (`test-analysis-process.md` §7); mark prerequisites.
 - If the user plans automation, add keyword-style steps (`test-analysis-process.md` §8).
 - Self-check every case against the quality criteria (`test-analysis-process.md` §4).
+- Coverage status per case vs the existing coverage from Step 0: `Tested` / `Partially tested` /
+  `New` (+ evidence). Only `New` and `Partially tested` go to the run list.
 
 ## Step 7: Prioritise
-P1 / P2 / P3 per `risk-prioritization.md` §3 (risk-based by default; requirements-based if the user
-gives priorities). Respect dependencies: a prerequisite runs first.
+P1 / P2 / P3 **per test case** per `risk-prioritization.md` §3 (risk-based by default;
+requirements-based if the user gives priorities). A high-risk requirement does not make all its
+tests P1: P1 only if the answer to "if only this test fails, do we stop the release?" is yes.
+If more than ~1/3 of requirements are High, re-rank them on a 1–5 scale (§3.2). Run the P1 share
+check (§3.3) and report the P1 / P2 / P3 counts. Respect dependencies: a prerequisite runs first.
 
 ## Step 8: Coverage and residual risk report
 Per technique: coverage items identified / covered / %, and what is deliberately left out and why

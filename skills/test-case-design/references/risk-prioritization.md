@@ -40,11 +40,34 @@ Rigour per level: see `technique-selection.md` section 3.
 
 ## 3. Test case priority (§5.1.5)
 
+Priority is assigned **per test case**, not per requirement. The requirement's risk level is the
+starting point; the test's own consequence of failure decides.
+
 | Priority | Meaning | Default from risk |
 |---|---|---|
-| **P1** | Run first; a failure blocks release | High-risk requirement: positive core flow + key negative / invalid transitions |
-| **P2** | Run in the same cycle | Medium risk, and the remaining tests of high-risk requirements |
+| **P1** | Run first; a failure blocks release | High-risk requirement: only the tests that pass the release-blocker question (3.1) — usually the positive core flow + the most damaging / most likely negative |
+| **P2** | Run in the same cycle | Medium risk, and the remaining tests of high-risk requirements (other boundaries, combinations, less likely negatives) |
 | **P3** | Run if time allows / regression later | Low risk, cosmetic, rare paths |
+
+### 3.1 Release-blocker question (per test case)
+"If only this test fails and everything else passes, would we stop the release?"
+Yes → P1. No, but it must be fixed this cycle → P2. No → P3.
+Example: payout total is wrong → P1. Wrong rounding display on a rare currency → P2/P3.
+
+### 3.2 When "everything is High" (risk scale does not discriminate)
+Typical for money, security or legal features: impact is High almost everywhere, so the 3×3 matrix
+puts most requirements in High. If more than ~1/3 of requirements are High:
+- re-assess those requirements on a **1–5 scale** for likelihood and impact (quantitative assessment,
+  §5.2.3) and rank them by the product;
+- split large requirements into test items and assess each separately (CTAL-TA §2.1) — often only
+  one part (the calculation) is High, the rest (display, filters) is Medium;
+- only the top of the ranking keeps P1 for its release-blocker tests.
+
+### 3.3 P1 share check (practical heuristic, not from the syllabus)
+After prioritising, count P1. If P1 is more than **~25–30 %** of the test cases, stop and re-run 3.1
+and 3.2 before presenting — a priority that covers most tests does not order anything. If P1 is still
+high after re-ranking, keep it, but state the reason to the user (e.g. "release-critical payroll
+feature; 35 % P1 justified because ..."). Always report the P1 / P2 / P3 counts.
 
 Strategies the syllabus names:
 - **Risk-based** (default here): tests for the highest risks first.
