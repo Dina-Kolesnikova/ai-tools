@@ -20,34 +20,42 @@ Each skill folder also has:
   and the API scenarios can be read side by side. No real product data anywhere.
 - `evals/` — short inputs with must / must-not checklists; run them after every change to the skill
 
-## Install
+## Install (plugin, one time)
 
-Clone the repo and **symlink** each skill folder and the shared folder into `~/.claude/skills/`,
-then restart Claude Code:
+In any Claude Code chat (terminal, desktop, VS Code or JetBrains panel):
 
-```bash
-git clone https://github.com/Dina-Kolesnikova/ai-tools.git ~/Documents/Apps/ai-tools
-for s in _shared test-case-design story-readiness-check api-test-scenario-generator; do
-  ln -s ~/Documents/Apps/ai-tools/skills/$s ~/.claude/skills/$s
-done
+```
+/plugin marketplace add Dina-Kolesnikova/ai-tools
+/plugin install ai-tools@ai-tools
 ```
 
-`_shared` has no `SKILL.md`, so it is not a skill; the symlink only makes the
-`../_shared/requirement-smells.md` links inside the two skills resolve.
+Update later with `/plugin update ai-tools`. The skills are then called with the plugin prefix:
+`/ai-tools:test-case-design`, `/ai-tools:story-readiness-check`,
+`/ai-tools:api-test-scenario-generator`, or just ask in words ("design test cases for this story").
 
-Then run `/test-case-design` or ask "design test cases for this story".
+The whole repo is installed, so the shared folder `skills/_shared/` and the cross-skill links
+(`../test-case-design/references/...`) work without any extra step.
 
-## Editing workflow (for humans and agents)
+## Developing the skills
 
-- This repo is the **single source of truth**. `~/.claude/skills/<name>` is a symlink to
-  `skills/<name>` here — never a copy.
-- Edit the skill here; Claude Code sees the change immediately (no copy / rsync step).
-- Then run the evals in `skills/<name>/evals/`, commit and push from this repo. If
-  `~/.claude/skills` is itself a git repo, keep these symlinks in its `.gitignore` so they are
-  never committed there.
-- New skill: create `skills/<name>/SKILL.md`, add the symlink, add a row to the table above.
+To edit a skill and see the change at once, add the marketplace from your local clone instead of
+GitHub, then install from it:
+
+```
+/plugin marketplace add ~/Documents/Projects/ai-tools
+/plugin install ai-tools@ai-tools
+```
+
+Workflow:
+- This repo is the **single source of truth**; never copy skill folders around.
+- Edit here, run the evals in `skills/<name>/evals/`, bump `version` in both
+  `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`, commit, push.
+  Users get the change with `/plugin update ai-tools`.
+- New skill: create `skills/<name>/SKILL.md` (+ `references/`, `templates/`, `examples/`,
+  `evals/`), add a row to the table above and a line to the changelog.
 - The repo is **public**: no project- or company-specific content, no credentials, no copyrighted
-  source documents (ISTQB syllabi are paraphrased and cited, not copied).
+  source documents (ISTQB syllabi are paraphrased and cited, not copied). Examples use an invented
+  domain only.
 
 ## Notes
 
@@ -60,6 +68,8 @@ Then run `/test-case-design` or ask "design test cases for this story".
 
 ## Changelog
 
+- **1.0.0, 2026-11-10** — packaged as a Claude Code plugin (`.claude-plugin/`); install via
+  `/plugin`, no symlinks.
 - **2026-11-10** — new skill `api-test-scenario-generator` (nine scenario groups, baseline + delta
   table, example and evals); all examples moved to one invented domain (gym membership), no
   hotel / travel wording left.
