@@ -1,5 +1,8 @@
 # Risk and prioritisation
 
+> Section numbers verified 2026-11-10 against the CTFL v4.0.1 and CTAL-TA v4.0 PDFs
+> (CTAL-TA §2.2 is titled "Risk Control"; regression selection is part of it).
+
 Sources: ISTQB CTFL Syllabus v4.0.1, §5.1.5 (test case prioritisation) and §5.2 (risk management);
 ISTQB CTAL-TA v4.0 chapter 2 (sections 4–5 below). Section numbers without prefix are CTFL.
 The 3×3 matrix and the P1–P3 mapping below are a practical qualitative scheme built on §5.2.3;

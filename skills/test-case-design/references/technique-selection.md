@@ -1,5 +1,7 @@
 # Technique selection: signals → technique → coverage criterion
 
+> Section numbers verified 2026-11-10 against the CTFL v4.0.1 and CTAL-TA v4.0 PDFs.
+
 Sources (cite as shown):
 - `CTFL §x` — ISTQB Certified Tester Foundation Level Syllabus v4.0.1, chapter 4 (techniques), §5.2 (risk)
 - `CTAL-TA §x` — ISTQB Advanced Level Test Analyst Syllabus v4.0, chapter 3 (techniques),
@@ -49,8 +51,9 @@ scenario-based testing (§3.2.3).
    (CTAL-TA §3.2.3). **Scenario + round-trip** for cyclical business processes (CTAL-TA §3.5.1).
 6. **CRUD + roles:** run the CRUD matrix per role when permissions differ; reading data that was never
    created / already deleted is a mandatory negative test.
-7. **Error guessing is always added** on top of systematic techniques; never the only technique when a
-   spec exists (CTFL §4.1).
+7. **Error guessing is always added** on top of systematic techniques. The syllabus calls
+   experience-based techniques complementary to black-box and white-box ones (CTFL §4.1); the
+   "never the only technique when a spec exists" rule is this skill's reading of that.
 8. **Exploratory complements, not replaces.** Write a charter, not a script.
 9. **White-box finds missing tests, not expected results** (CTFL §4.3.3).
 

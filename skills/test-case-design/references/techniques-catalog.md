@@ -1,5 +1,7 @@
 # Techniques catalog: how to derive coverage items
 
+> Section numbers verified 2026-11-10 against the CTFL v4.0.1 and CTAL-TA v4.0 PDFs.
+
 Source: ISTQB CTFL Syllabus v4.0.1, chapter 4. Paraphrased; section numbers point to the original.
 For *which* technique to pick, see `technique-selection.md`. This file is *how* to apply it.
 

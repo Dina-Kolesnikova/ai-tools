@@ -26,10 +26,13 @@
 |---|---|---|---|---|---|---|
 
 ## 2. Technique plan `[light]`  ← gate (if wanted): confirm before section 3
-| Req | Signal in the requirement | Technique | Coverage criterion | Why (syllabus §) |
+| Req | Signal in the requirement | Technique | Coverage criterion | Why (technique, ISTQB ref) |
 |---|---|---|---|---|
-| R2 | statuses Draft → Finalized → Paid; "cannot go back" | State transition | All transitions + round-trip | Lifecycle with forbidden moves, high risk (CTFL §4.2.4, CTAL-TA §3.2.2) |
-| R2 | known bugs in this area | Error guessing | Fault list from history | CTFL §4.4.1 |
+| R2 | statuses Draft → Finalized → Paid; "cannot go back" | State transition | All transitions + round-trip | Lifecycle with forbidden moves, high risk — state transition with round-trip (CTFL §4.2.4, CTAL-TA §3.2.2) |
+| R2 | known bugs in this area | Error guessing | Fault list from history | Past failures in this module — error guessing (CTFL §4.4.1) |
+
+The "Why" cell says the reason and the technique in words first; the section number comes last and
+can be dropped if the project does not want citations in team deliverables.
 
 ## 3. Test models `[full]`
 One subsection per technique: partitions / boundary points / ON-OFF-IN-OUT / pairwise table /

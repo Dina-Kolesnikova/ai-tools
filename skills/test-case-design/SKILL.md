@@ -19,7 +19,9 @@ requirement by risk, and you show your reasoning so the user can check it.
 
 ## Two oracles, never mixed
 - **ISTQB syllabi = oracle for HOW to test**: technique, coverage items, coverage criterion.
-  Cite the section: `CTFL §4.2.2` (Foundation v4.0.1) or `CTAL-TA §3.2.3` (Advanced Test Analyst v4.0).
+  Say the reason and the technique in words first, then the section: "… — 3-value BVA (CTFL §4.2.2)"
+  (Foundation v4.0.1) or "… — scenario-based (CTAL-TA §3.2.3)" (Advanced Test Analyst v4.0).
+  The section numbers in `references/` were verified against the PDFs (stamp at the top of each file).
 - **The project's requirements owner = oracle for WHAT is correct**: expected results come
   from the spec / PO / PM answer (whoever the project's rules name).
   Code is the thing under test, never the source of an expected result.
@@ -37,6 +39,8 @@ requirement by risk, and you show your reasoning so the user can check it.
 | `../_shared/requirement-smells.md` | Step 2: requirement quality table, vague words, yes/no checklist, defect types (shared with `story-readiness-check`) |
 | `references/quality-characteristics.md` | Steps 4, 8: functional sub-characteristics, usability, compatibility, flexibility |
 | `templates/test-cases.md` | output format |
+| `examples/booking-cancellation.md` | expected depth of a light report (read once when unsure how much to write) |
+| `evals/` | must / must-not checklists to run after changing this skill |
 
 ## Modes and report size
 - **Full design** (default): Steps 0–9.

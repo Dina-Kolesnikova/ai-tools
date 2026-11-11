@@ -1,5 +1,8 @@
 # Quality characteristics: what to cover beyond "does it work"
 
+> Section numbers verified 2026-11-10 against the CTAL-TA v4.0 PDF (§4.1 Functional, §4.2 Usability,
+> §4.3 Flexibility, §4.4 Compatibility).
+
 Source: ISTQB CTAL-TA v4.0 chapter 4 (based on ISO/IEC 25010:2023). Paraphrased; cite as `CTAL-TA §x`.
 Use this to decide which test types the test set needs and to name the residual risks you do not cover.
 

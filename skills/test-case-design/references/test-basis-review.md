@@ -1,5 +1,9 @@
 # Reviewing the test basis (find spec defects before writing tests)
 
+> Section numbers verified 2026-11-10 against the CTAL-TA v4.0 PDF. The five review techniques
+> (ad hoc, checklist-based, scenario-based, role-based, perspective-based reading) are CTAL-TA
+> §5.2.2 "Applying Review Techniques"; CTFL v4.0.1 does not list them.
+
 Source: ISTQB CTAL-TA v4.0 §5.1, §5.2 (phase containment), §1.2.1. Paraphrased.
 
 Goal: detect defects in requirements while they are cheap to fix (shift left). Every test model built
